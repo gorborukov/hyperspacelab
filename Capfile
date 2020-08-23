@@ -34,6 +34,8 @@ require "capistrano/rbenv"
 # require "capistrano/rails/assets"
 # require "capistrano/rails/migrations"
 require "capistrano/passenger"
+require "capistrano/rails/console"
+require "capistrano/rake"
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.7.1'
