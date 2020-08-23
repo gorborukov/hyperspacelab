@@ -1,0 +1,6 @@
+<div class="container publications">
+	<h1><%= @publication.title %></h1>
+	<small><%= @publication.created_at.strftime("%m/%d/%Y") %></small>
+	<%= image_tag url_for(@product.main), class: 'img-fluid' rescue nil %>
+	<p class="content"><%= @publication.content %></p>
+</div>

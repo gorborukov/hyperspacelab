@@ -1,0 +1,42 @@
+@import "~bootstrap/scss/bootstrap";
+@import "tiny-slider/src/tiny-slider";
+@import "@fortawesome/fontawesome-free";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,900;1,200;1,500&display=swap');
+@import "actiontext.scss";
+
+@import "_navigation";
+@import "_products";
+@import "_carousel";
+
+@import "auth";
+@import "product"; 
+@import "publications"; 
+
+
+body {
+	background: #000;
+	font-family: 'Montserrat', sans-serif;
+}
+
+footer {
+	background: #000;
+	text-align: center;
+}
+
+footer li {
+	padding: 0px 5px;
+}
+
+footer a {
+	color: #b3b3b3;
+	text-transform: uppercase;
+	-webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+	color: #fff;
+	text-decoration: none;
+}

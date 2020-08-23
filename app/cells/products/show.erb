@@ -1,0 +1,24 @@
+<div class="arrow-controls">
+  <ul class="controls" id="customize-controls" aria-label="Carousel Navigation" tabindex="0">
+      <li class="prev arrow" aria-controls="customize" tabindex="-1" data-controls="prev">
+        <%= image_tag 'angle-left.png' %>
+      </li>
+      <li class="next arrow" aria-controls="customize" tabindex="-1" data-controls="next">
+        <%= image_tag 'angle-right.png' %>
+      </li>
+  </ul>
+</div>
+<div class="slider">
+  <% @products.each do |product| %>
+    <div class="slide">
+      <%= link_to product do %>
+        <%= image_tag url_for(product.preview), class: 'img-fluid img-main' %>
+      <% end %>
+      <div class="product-data">
+        <div class="title"><%= product.title %></div>
+        <%= link_to "Buy it now", product, class: 'btn btn-primary' %>
+        <div class="price">$<%= product.price %></div>
+      </div>
+    </div>
+  <% end %>
+</div>

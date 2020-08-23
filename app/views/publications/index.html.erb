@@ -1,0 +1,8 @@
+<div class="container publications">
+	<% @publications.each do |publication| %>
+		<h1><%= link_to publication.title, publication %></h1>
+		<small><%= publication.created_at.strftime("%m/%d/%Y") %></small>
+		<%= image_tag url_for(@product.main), class: 'img-fluid' rescue nil %>
+		<p class="content"><%= truncate(strip_tags(publication.content.to_s), length: 100) %> <%= link_to ("&rarr;".html_safe), publication %></p>
+	<% end %>
+</div>

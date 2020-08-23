@@ -1,0 +1,22 @@
+<div class="headline">
+  <h1>HYPERSPACE LAB</h1>
+  <p class="sub-header">This is how the future sounds</p>
+</div>
+<%= cell :products %>
+
+<script>
+  var slider = tns({
+    container: '.slider',
+    controlsContainer: '#customize-controls',
+    autoHeight: true,
+    mouseDrag: true,
+    items: 1,
+    slideBy: 'page',
+    autoplay: true,
+    autoplayButtonOutput: false
+  });
+
+  document.addEventListener("turbolinks:before-cache", function() {
+  	slider.destroy();
+  });
+</script>

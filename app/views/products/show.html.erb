@@ -1,0 +1,23 @@
+<div class="product-page">
+	<div class="container">
+		<div class="product-title">
+			<h1><%= @product.title %></h1>
+			<div class="product-subtitle"><%= @product.content %></div>
+		</div>
+		<h2>GUI preview</h2>
+		<div class="gui-preview"><%= image_tag url_for(@product.main), class: 'main-image' rescue nil %></div>
+		<h2>Tech information</h2>
+		<p class="product-info"><%= @product.tech_info %></p>
+		<h2>Demo version</h2>
+		<p class="product-info">Demo version makes noise every 20 seconds <br/>
+			<%= link_to 'mac', @product.demo_link_mac %> / <%= link_to 'win', @product.demo_link_win %>
+		</p>
+		<h2>Full version</h2>
+		<%= link_to "Buy it now", @product.gumroad_link, class: 'btn btn-primary product-buy' %>
+        <div class="product-price">$<%= @product.price %></div>
+		<h2>Operation manual</h2>
+		<p class="product-info">Operation manual <br/><%= link_to '.pdf', @product.manual_link %></p>
+		<h2>Demonstration video</h2>
+		<p class="product-info"><%= @product.youtube_link.html_safe rescue nil %></p>
+	</div>
+</div>

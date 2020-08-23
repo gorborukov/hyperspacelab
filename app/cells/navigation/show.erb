@@ -1,0 +1,29 @@
+<nav class="navbar navbar-dark" style="background-color: #000">
+  <% if params[:controller] == "products" %>
+    <%= link_to root_path, class: 'navbar-brand products-brand' do %>
+      <%= image_tag 'logo.svg', loading: 'lazy', width: '42', height: '42' %>
+    <% end %>
+    <% @product = Product.find(params[:id]) %>
+    <%= link_to ("<i class='far fa-credit-card'></i> " + "$#{@product.price}"), (@product.gumroad_link rescue nil), class: 'btn btn-primary product-buy' %>
+  <% else %>
+    <%= link_to root_path, class: 'navbar-brand' do %>
+      <%= image_tag 'logo.svg', loading: 'lazy', width: '42', height: '42' %>
+    <% end %>
+  <% end %>
+  <button class="navbar-toggler order-first" type="button" data-toggle="collapse" data-target="#navbarText">
+      <%= image_tag 'burger.svg', loading: 'lazy', width: '42', height: '42' %>
+  </button>
+  <div class="collapse navbar-collapse justify-content-center" id="navbarText">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <%= link_to "Products", root_path, class: "nav-link" %>    
+      </li>
+      <li class="nav-item">
+        <%= link_to "News", publications_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
