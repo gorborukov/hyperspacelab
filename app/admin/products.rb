@@ -9,6 +9,13 @@ ActiveAdmin.register Product do
 
   controller do
     helper ActionText::Engine.helpers
+    def find_resource
+      if resource_class.is_a?(FriendlyId)
+        scoped_collection.friendly.find(params[:id])
+      else
+        scoped_collection.find(params[:id])
+      end
+    end
   end
 
   index do
