@@ -4,7 +4,7 @@
       <%= image_tag 'logo.svg', loading: 'lazy', width: '42', height: '42' %>
     <% end %>
     <% @product = Product.find(params[:id]) %>
-    <%= link_to ("<i class='far fa-credit-card'></i> " + "$#{@product.price}"), (@product.gumroad_link rescue nil), class: 'btn btn-primary product-buy' %>
+    <%= link_to ("<i class='fas fa-cart-plus'></i> " + "$#{@product.price}"), (@product.gumroad_link rescue nil), class: 'btn btn-primary product-buy' %>
   <% else %>
     <%= link_to root_path, class: 'navbar-brand' do %>
       <%= image_tag 'logo.svg', loading: 'lazy', width: '42', height: '42' %>

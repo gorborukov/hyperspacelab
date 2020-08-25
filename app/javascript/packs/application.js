@@ -9,6 +9,9 @@ require("@rails/activestorage").start()
 require("channels")
 require("trix")
 require("@rails/actiontext")
+//require("jquery")
+
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -18,9 +21,16 @@ require("@rails/actiontext")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 import "bootstrap"
+// Enable for grid
+//import * as Macy from "macy"
+//import $ from "jquery"
+//import "isotope-layout/dist/isotope.pkgd.js"
 import "@fortawesome/fontawesome-free/js/all"
 import { tns } from "tiny-slider/src/tiny-slider"
 global.tns = tns
+// Enable for grid
+//global.Macy = Macy
+//global.$ = $
 
 import "./stylesheets/application"
 
@@ -28,6 +38,3 @@ import "./stylesheets/application"
 document.addEventListener("turbolinks:load", () => {
   FontAwesome.config.mutateApproach = 'sync'; // Turbolinks fix for menu blinking 
 })
-
-require("trix")
-require("@rails/actiontext")

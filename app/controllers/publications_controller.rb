@@ -4,6 +4,7 @@ class PublicationsController < ApplicationController
 	end
 
 	def show
-		@publication = Publication.find(params[:id])
+		@publication = Publication.friendly.find(params[:id])
+		set_meta_tags title: @publication.title
 	end
 end
