@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_002949) do
+ActiveRecord::Schema.define(version: 2020_08_28_142106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_002949) do
     t.string "manual_link"
     t.string "youtube_link"
     t.string "gumroad_link"
+    t.string "gumroad_slug"
   end
 
   create_table "publications", force: :cascade do |t|

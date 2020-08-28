@@ -5,7 +5,7 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :content, :tech_info, :demo_link_mac, :demo_link_win, :manual_link, :youtube_link, :gumroad_link, :note, :price, :slug, :sku, :available, :preorder, :main, :background, :preview
+  permit_params :title, :content, :tech_info, :demo_link_mac, :demo_link_win, :manual_link, :youtube_link, :gumroad_link, :note, :price, :slug, :gumroad_slug,:sku, :available, :preorder, :main, :background, :preview
 
   controller do
     helper ActionText::Engine.helpers
@@ -47,6 +47,7 @@ ActiveAdmin.register Product do
       input :manual_link
       input :youtube_link
       input :gumroad_link
+      input :gumroad_slug
       input :price
     end
     inputs 'Additional' do

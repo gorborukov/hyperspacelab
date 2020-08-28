@@ -4,6 +4,6 @@ class LicensesController < ApplicationController
   end
 
   def check
-
+  	@products = Product.all
   end
 end
