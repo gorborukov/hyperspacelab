@@ -1,5 +1,6 @@
 import React from "react"
-import PropTypes from "prop-types"
+import axios from "axios"
+import ReCAPTCHA from "react-google-recaptcha";
 
 class CheckSerial extends React.Component {
   constructor(props) {
@@ -7,22 +8,48 @@ class CheckSerial extends React.Component {
     this.state = {
     	serial: '',
     	products: props.products,
-    	product: props.products[0].id
-	}
+    	slug: props.products[0].gumroad_slug,
+    	alert: '',
+    	load: false,
+    	value: "[empty]",
+    	expired: "false"
+	};
+	this._reCaptchaRef = React.createRef();
+  }
+
+  componentDidMount() {
+  	setTimeout(() => {
+      this.setState({ load: true });
+    }, 1500);
   }
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  onCaptchaChange = value => {
+    this.setState({ value });
+    if (value === null) this.setState({ expired: "true" });
+  };
+
   onSubmit = (e) => {
     e.preventDefault(e);
-    console.log(this.state.product);
+    this.setState({ loading: true });
+    
+    const { slug, serial } = this.state;
+    axios.get('/api/check', {params: { slug: slug, serial: serial }})
+    .then((response) => {
+    	this.setState({ alert: response.data.message });
+    	console.log(response.data.p)
+    })
+    .catch((error) => {
+      this.setState({ alert: error });
+    });
   }
 
   render () {
-  	const { serial, products, product } = this.state;
-  	const names = products.map((product) => <option key={product.id} value={product.id}>{product.title}</option>);
+  	const { serial, products, product, alert } = this.state;
+  	const names = products.map((product) => <option key={product.id} value={product.gumroad_slug}>{product.title}</option>);
     return (
       <React.Fragment>
         <form className="order-form" onSubmit={this.onSubmit}>
@@ -36,8 +63,16 @@ class CheckSerial extends React.Component {
 		  	  {names}
 		    </select>
 		  </div>
+		  <div className="form-group">
+		    <ReCAPTCHA
+			  sitekey="6LeQlcQZAAAAALU0g9ONgGlXdbJbihfRAPeXE66r"
+			  onChange={this.onCaptchaChange}
+			  ref={this._reCaptchaRef}
+			  theme="dark"
+			/>
+		  </div>
 		  <button type="submit" className="btn">Check</button>
-		  {product}
+		  <div className="form-alert">{alert}</div>
 		</form>
       </React.Fragment>
     );

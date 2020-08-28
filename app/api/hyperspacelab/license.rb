@@ -3,7 +3,7 @@ module Hyperspacelab
     desc 'Returns license status'
     # http://localhost:3000/api/check?slug=jImxw&serial=381762DF-77564401-9631035E-82768CEE
     get :check do
-      { message: Gumroad.new().check(params[:slug], params[:serial]) }
+      { message: Gumroad.new().check(params[:slug], params[:serial]), p: params }
     end
 
    	desc 'Serial number registration'
