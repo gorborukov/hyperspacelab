@@ -26,7 +26,7 @@ class Gumroad
       	end
       end
     when 404
-      return "Error #{response.code}: serial number not found."
+      return "Serial number not found."
     when 500...600
       return "Network error #{response.code}. Please try again later."
     end

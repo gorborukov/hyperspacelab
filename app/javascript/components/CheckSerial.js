@@ -1,6 +1,6 @@
 import React from "react"
 import axios from "axios"
-import ReCAPTCHA from "react-google-recaptcha";
+import Captcha from "react-numeric-captcha";
 
 class CheckSerial extends React.Component {
   constructor(props) {
@@ -9,28 +9,15 @@ class CheckSerial extends React.Component {
     	serial: '',
     	products: props.products,
     	slug: props.products[0].gumroad_slug,
+    	loading: false,
     	alert: '',
-    	load: false,
-    	value: "[empty]",
-    	expired: "false"
-	};
-	this._reCaptchaRef = React.createRef();
-  }
-
-  componentDidMount() {
-  	setTimeout(() => {
-      this.setState({ load: true });
-    }, 1500);
+    	captcha: false
+	}
   }
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
-
-  onCaptchaChange = value => {
-    this.setState({ value });
-    if (value === null) this.setState({ expired: "true" });
-  };
 
   onSubmit = (e) => {
     e.preventDefault(e);
@@ -48,7 +35,7 @@ class CheckSerial extends React.Component {
   }
 
   render () {
-  	const { serial, products, product, alert } = this.state;
+  	const { serial, products, product, alert, captcha } = this.state;
   	const names = products.map((product) => <option key={product.id} value={product.gumroad_slug}>{product.title}</option>);
     return (
       <React.Fragment>
@@ -64,14 +51,10 @@ class CheckSerial extends React.Component {
 		    </select>
 		  </div>
 		  <div className="form-group">
-		    <ReCAPTCHA
-			  sitekey="6LeQlcQZAAAAALU0g9ONgGlXdbJbihfRAPeXE66r"
-			  onChange={this.onCaptchaChange}
-			  ref={this._reCaptchaRef}
-			  theme="dark"
-			/>
+		    <label>Enter code from image below</label>
+		  	<Captcha onChange={status => this.setState({ captcha: status })} />
 		  </div>
-		  <button type="submit" className="btn">Check</button>
+		  <button disabled={!captcha} type="submit" className="btn">Check</button>
 		  <div className="form-alert">{alert}</div>
 		</form>
       </React.Fragment>
