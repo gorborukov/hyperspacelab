@@ -4,10 +4,12 @@ import Captcha from "react-numeric-captcha"
 import Loader from "react-loader-spinner"
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
-class CheckSerial extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+    	name: '',
+    	email: '',
     	serial: '',
     	products: props.products,
     	slug: props.products[0].gumroad_slug,
@@ -25,8 +27,8 @@ class CheckSerial extends React.Component {
     e.preventDefault(e);
     this.setState({ loading: true });
     
-    const { slug, serial } = this.state;
-    axios.get('/api/check', {params: { slug: slug, serial: serial }})
+    const { slug, serial, name, email } = this.state;
+    axios.get('/api/register', {params: { slug: slug, serial: serial, name: name, email: email }})
     .then((response) => {
     	this.setState({ alert: response.data.message, loading: false });
     })
@@ -36,11 +38,19 @@ class CheckSerial extends React.Component {
   }
 
   render () {
-  	const { serial, products, product, alert, captcha, loading } = this.state;
+  	const { name, email, serial, products, product, alert, captcha, loading } = this.state;
   	const names = products.map((product) => <option key={product.id} value={product.gumroad_slug}>{product.title}</option>);
     return (
       <React.Fragment>
         <form className="order-form" onSubmit={this.onSubmit}>
+          <div className="form-group">
+	      	<label>Full Name</label>
+			<input type="text" className="form-control" placeholder="Your name and surname" name="name" value={name} onChange={this.onChange} required/>
+		  </div>
+          <div className="form-group">
+	      	<label>E-mail</label>
+			<input type="email" className="form-control" placeholder="Your email" name="email" value={email} onChange={this.onChange} required/>
+		  </div>
 	      <div className="form-group">
 	      	<label>Enter your serial number</label>
 			<input type="text" className="form-control" placeholder="Your serial number" name="serial" value={serial} onChange={this.onChange} required/>
@@ -55,7 +65,7 @@ class CheckSerial extends React.Component {
 		    <label>Enter code from image below</label>
 		  	<Captcha onChange={status => this.setState({ captcha: status })} />
 		  </div>
-		  <button disabled={!captcha} type="submit" className="btn">Check</button>
+		  <button disabled={!captcha} type="submit" className="btn">Register</button>
 		  <Loader
         	type="ThreeDots"
         	color="#FFFFFF"
@@ -70,4 +80,4 @@ class CheckSerial extends React.Component {
   }
 }
 
-export default CheckSerial
+export default Register

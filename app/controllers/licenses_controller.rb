@@ -1,6 +1,6 @@
 class LicensesController < ApplicationController
   def register
-	@license = License.new
+	@products = Product.all
   end
 
   def check
