@@ -4,5 +4,19 @@
 </div>
 <%= cell :products %>
 <%# cell(:products).(:grid) %>
-<script src="/assets/slider.js">
+<script>
+  var slider = tns({
+    container: '.slider',
+    controlsContainer: '#customize-controls',
+    autoHeight: true,
+    mouseDrag: true,
+    items: 1,
+    slideBy: 'page',
+    autoplay: true,
+    autoplayButtonOutput: false
+  });
+
+  document.addEventListener("turbolinks:before-cache", function() {
+  	slider.destroy();
+  });
 </script>
